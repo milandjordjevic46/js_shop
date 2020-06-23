@@ -3,3 +3,19 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+button {
+    outline: none!important;
+}
+
+.outline_none {
+    outline: none;
+}
+
+.cp {
+    cursor: pointer;
+}
+
+.border_radius_5 {
+    border-radius: 5px;
+}

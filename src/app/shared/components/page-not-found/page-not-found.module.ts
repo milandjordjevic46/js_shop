@@ -7,6 +7,6 @@ import { PageNotFoundComponent } from './page-not-found.component';
 @NgModule({
   imports: [CommonModule, AngularMaterialModule],
   declarations: [PageNotFoundComponent],
-  exports: [PageNotFoundModule],
+  exports: [PageNotFoundComponent],
 })
 export class PageNotFoundModule {}

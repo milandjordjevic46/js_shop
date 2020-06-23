@@ -13,7 +13,7 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
-  // {path: '**', component: PageNotFoundComponent, data: {redirectTo: ''}}
+  {path: '**', component: PageNotFoundComponent, data: {redirectTo: ''}}
 
 ];
 

@@ -1,1 +1,14 @@
-<p>sidebar works!</p>
+<mat-nav-list>
+  <mat-list-item [routerLink]="['/products']">
+    <mat-icon>list</mat-icon>
+    <span>Products</span>
+  </mat-list-item>
+  <mat-list-item  [routerLink]="['/about']">
+    <mat-icon>business</mat-icon>
+    <span>About</span>
+  </mat-list-item>
+  <mat-list-item  [routerLink]="['/contact']">
+    <mat-icon>perm_phone_msg</mat-icon>
+    <span>Contact</span>
+  </mat-list-item>
+</mat-nav-list>
