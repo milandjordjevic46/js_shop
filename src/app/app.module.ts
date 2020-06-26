@@ -3,22 +3,24 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { PageNotFoundModule } from './shared/components/page-not-found/page-not-found.module';
-import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
+import {
+  IsLoggedService,
+  IsLoggedServiceImpl,
+} from './shared/services/is-logged.service';
+import {
+  OrdersService,
+  OrdersServiceImpl,
+} from './shared/services/orders.service';
 
 @NgModule({
-  declarations: [
-    AppComponent
+  declarations: [AppComponent],
+  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule],
+  providers: [
+    { provide: IsLoggedService, useClass: IsLoggedServiceImpl },
+    { provide: OrdersService, useClass: OrdersServiceImpl },
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

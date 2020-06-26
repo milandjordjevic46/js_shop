@@ -11,8 +11,18 @@ import { AngularMaterialModule } from '../shared/modules/angular-material/angula
 import { ToolbarModule } from '../shared/components/toolbar/toolbar.module';
 import { SidebarModule } from '../shared/components/sidebar/sidebar.module';
 import { DashboardService, DashboardServiceImpl } from './dashboard.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SingleProductComponent } from './single-product/single-product.component';
+import { MyInterceptor } from '../shared/interceptor/httpconfig.interceptor';
+import {
+  UserInfoService,
+  UserInfoServiceImpl,
+} from '../shared/services/user-info.service';
+import { CartComponent } from './cart/cart.component';
+import { AuthGuard } from '../auth/auth.guard';
+import { OrdersComponent } from './protected/orders/orders.component';
+import { DirectivesModule } from '../shared/directives/directives.module';
+import { SnackBarService } from '../shared/services/snack-bar.service';
 
 const routes = [
   {
@@ -40,6 +50,15 @@ const routes = [
         path: 'about',
         component: AboutComponent,
       },
+      {
+        path: 'cart',
+        component: CartComponent,
+      },
+      {
+        path: 'orders',
+        component: OrdersComponent,
+        canActivate: [AuthGuard],
+      },
     ],
   },
   {
@@ -56,6 +75,8 @@ const routes = [
     AboutComponent,
     ContactComponent,
     SingleProductComponent,
+    CartComponent,
+    OrdersComponent,
   ],
   imports: [
     CommonModule,
@@ -63,10 +84,19 @@ const routes = [
     AngularMaterialModule,
     ToolbarModule,
     SidebarModule,
-    HttpClientModule
+    HttpClientModule,
+    DirectivesModule,
   ],
   providers: [
-    {provide: DashboardService, useClass: DashboardServiceImpl}
-  ]
+    AuthGuard,
+    SnackBarService,
+    { provide: DashboardService, useClass: DashboardServiceImpl },
+    { provide: UserInfoService, useClass: UserInfoServiceImpl },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MyInterceptor,
+      multi: true,
+    },
+  ],
 })
 export class DashboardModule {}

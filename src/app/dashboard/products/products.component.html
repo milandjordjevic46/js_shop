@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-sm-3 mt-3" *ngFor="let item of products.products">
       <div
-        class="p-2 bg-white mat-elevation-z4 d-flex flex-column justify-content-between h-100 border_radius_5"
+        class="p-2 bg-white mat-elevation-z4 d-flex flex-column justify-content-between h-100 border_radius_5 cp"
       (click)="onClickOnProduct(item.id)"
         >
         <div class="w-100">
@@ -27,9 +27,9 @@
         <div class="">
           <h4 class="text-center">{{ item.name }}</h4>
           <div class="">Code: {{ item.code }}</div>
-          <div class="">{{ item.price | currency: "INR":"RSD ":"3.2-2" }}</div>
+          <div class="">{{ item.price | number:'1.2-2' }} RSD</div>
           <mat-divider class="mt-2 mb-2"></mat-divider>
-          <div class="text-center"><mat-icon>shopping_cart</mat-icon></div>
+          <div appStopPropagation (click)="onClickAddToCart(item)" class="text-center"><mat-icon>shopping_cart</mat-icon></div>
         </div>
       </div>
     </div>

@@ -1,1 +1,44 @@
-<p>single-product works!</p>
+<ng-template #spinner>
+  <div class="row h-100">
+    <div class="col-sm-12 d-flex justify-content-center align-items-center">
+      <mat-spinner> </mat-spinner>
+    </div>
+  </div>
+</ng-template>
+<ng-container *ngIf="productData; else spinner">
+  <div class="row h-100">
+    <div class="col-sm-12 p-3">
+      <div class="bg-white border_radius_5 mat-elevation-z4 p-3 h-100">
+        <div class="mt-3 mb-3">{{ productData.name }}</div>
+        <mat-divider></mat-divider>
+        <div class="mt-3 mb-3">Price: {{ productData.price | number:'1.2-2' }} RSD</div>
+        <div class="mt-3 mb-3">Code: {{ productData.code }}</div>
+        <div class="mt-3 mb-3">
+          Created at: {{ productData.createdAt | date: "dd.MM.yyyy" }}
+        </div>
+        <mat-divider></mat-divider>
+        <ng-template #images>
+          <img
+            class="mt-3 mb-3"
+            src="../../../assets/no_image.jpg"
+            style="height: 100px;"
+            alt="No image"
+          />
+        </ng-template>
+        <ng-container *ngIf="productData.imageUrls.length; else images">
+          <img
+            class="mt-3 mb-3 mr-3"
+            *ngFor="let item of productData.imageUrls"
+            [src]="item"
+            style="height: 100px;"
+          />
+        </ng-container>
+        <mat-divider></mat-divider>
+        <button class="mt-3 mb-3" (click)="onClickAddToChart()" mat-raised-button color="primary">
+          <mat-icon>shopping_cart</mat-icon>
+          Add to chart
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

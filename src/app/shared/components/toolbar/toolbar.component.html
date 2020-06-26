@@ -1,17 +1,79 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-
-    <span class="outline_none cp" [routerLink]="['/home']">
+    <span
+      class="outline_none cp d-flex align-items-center"
+      [routerLink]="['/home']"
+    >
       <mat-icon>home</mat-icon>
       <span>Home</span>
     </span>
 
     <span class="w-100"></span>
 
-    <mat-icon>shopping_cart</mat-icon>
-    <span class="ml-1 mr-2">0,00 RSD</span>
+    <span
+      class="outline_none cp d-flex align-items-center"
+      [routerLink]="['/cart']"
+    >
+      <mat-icon
+        [matBadge]="getNumberOfOrders()"
+        matBadgeColor="warn"
+        matBadgePosition="above before"
+        matBadgeSize="small"
+        >shopping_cart</mat-icon
+      >
+      <span class="ml-1 mr-2">{{totalOrdersSum() | number: "1.2-2"}} RSD</span>
+    </span>
 
-    <mat-icon>login</mat-icon>
-    <span class="ml-1">Login</span>
+    <ng-template #login>
+      <span
+        class="outline_none cp d-flex align-items-center"
+        [routerLink]="['/auth/login']"
+      >
+        <mat-icon>login</mat-icon>
+        <span class="ml-1">Login</span>
+      </span>
+    </ng-template>
+
+    <div *ngIf="logged; else login">
+      <button mat-button [matMenuTriggerFor]="belowMenu">
+        <mat-icon>person</mat-icon>
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #belowMenu="matMenu" yPosition="below">
+        <div class="d-flex p-2">
+          <div class="w-25">
+            <img
+              class="w-100 border_radius_5"
+              src="../../../../assets/user.jpg"
+              alt=""
+            />
+          </div>
+          <div class="p-2 font-weight-bold">
+            <div class="">
+              <span>{{ user.firstName }}</span>
+              <span class="ml-1">{{ user.lastName }}</span>
+            </div>
+            <div class="">
+              {{ user.email }}
+            </div>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
+
+        <button mat-menu-item [routerLink]="['/orders']">
+          <mat-icon>add_shopping_cart</mat-icon>
+          <span>Orders</span>
+        </button>
+
+        <mat-divider></mat-divider>
+
+        <button (click)="logout()" mat-menu-item>
+          <mat-icon>power_settings_new</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
