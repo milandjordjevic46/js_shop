@@ -33,7 +33,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  getProducts(skip: number, limit?: number) {
+  getProducts(skip: number, limit?: number): void {
     this.productsPresenter.getAllProducts(skip, limit | this.limit).subscribe(
       (res) => {
         this.products = res;
@@ -44,16 +44,16 @@ export class ProductsComponent implements OnInit {
     );
   }
 
-  getServerData(e) {
+  getServerData(e): void {
     let skip = e.pageIndex * e.pageSize;
     this.getProducts(skip);
   }
 
-  onClickOnProduct(id) {
+  onClickOnProduct(id): void {
     this.productsPresenter.seeDetails(id);
   }
 
-  onClickAddToCart(product: SingleProduct) {
+  onClickAddToCart(product: SingleProduct): void {
     const existingProduct = this.orders.find(
       (_product) => _product.id === product.id
     );
@@ -64,6 +64,6 @@ export class ProductsComponent implements OnInit {
       this.orders.push(product);
     }
     this.ordersService.setOrders(this.orders);
-    this.snackBar.showSnack("Added to cart")
+    this.snackBar.showSnack('Added to cart');
   }
 }

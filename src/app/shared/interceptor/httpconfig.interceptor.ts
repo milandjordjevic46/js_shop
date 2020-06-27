@@ -44,6 +44,7 @@ export class MyInterceptor implements HttpInterceptor {
           //logging the http response to browser's console in case of a failuer
           if (error.status === 401) {
             this.user_info.deleteToken();
+            this.user_info.deleteUserInfo();
             this.router.navigate(['auth/login']);
           }
         }
